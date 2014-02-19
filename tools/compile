@@ -1,0 +1,55 @@
+#!/bin/bash
+#set -x
+# Paths
+VENDOR=vendor/matricom
+
+NIGHTLY=0
+DEVICE=
+declare -a BUILD_TARGS=()
+
+BUILD_TYPE=$1
+
+# setup script based on type
+if [ "$BUILD_TYPE" == "nightly" ]; then
+    NIGHTLY=1
+else
+    # device was specified so lets build it
+    DEVICE=$BUILD_TYPE
+fi
+
+# Make sure at build_top
+cd $ANDROID_BUILD_TOP
+
+. build/envsetup.sh
+
+# Sync
+# repo sync -j50
+
+# Clean tree once for nightly
+# make clean
+
+# Time to go
+if [ "$NIGHTLY" -eq 1 ]; then
+    # It's a nightly so build for all matricom targets in ${VENDOR}/vendorsetup.sh
+    targets=$(wc -l < "${VENDOR}/vendorsetup.sh")
+    #echo $targets
+    for ((i = 0; i < $targets; i++))
+    do
+        n=$(($i + 1))
+        target=$(sed "${n}q;d" ${VENDOR}/vendorsetup.sh | awk '{print $2}')
+        # nightlies will be user - so prune off userdebug
+        if grep -q userdebug <<<$target; then
+            continue
+        fi
+        target=${target##*_}
+        target=${target%%-*}
+        BUILD_TARGS+=("$target")
+    done
+    for i in "${BUILD_TARGS[@]}"
+    do
+         time brunch $i
+         # upload and other magic here for this ota
+    done
+else
+    time brunch $DEVICE
+fi

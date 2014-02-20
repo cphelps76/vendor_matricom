@@ -26,7 +26,7 @@ cd $ANDROID_BUILD_TOP
 # repo sync -j50
 
 # Clean tree once for nightly
-# make clean
+make clean
 
 # Time to go
 if [ "$NIGHTLY" -eq 1 ]; then

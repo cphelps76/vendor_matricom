@@ -48,8 +48,6 @@ echo
 #FIRMWARE_REV=`sed -n -e'/ro.matricom.firmware.version/s/^.*=//p' $REPACK/ota/system/build.prop
 FIRMWARE_REV=1.1.6
 
-# Rename and copy over $OTAPACKAGE to $OTAPACK
-cp $OTAPACKAGE $OTAPACK/
 # Strip directory from OTAPACKAGE
 OTAPACKAGE=${OTAPACKAGE##*/}
 # if VERSION is g18ref reprop to mx2
@@ -57,7 +55,8 @@ if [ $VERSION == "g18ref" ]; then
     VERSION=mx2
 fi
 
-mv $OTAPACK/$OTAPACKAGE $OTAPACK/${VERSION}.zip
+# Rename and copy over $OTAPACKAGE to $OTAPACK
+cp $OUT/${VERSION}update.zip $OTAPACK/
 
 # Copy over factory_update_param.aml and recovery.img
 cp ${VENDOR}/prebuilt/ota/factory_update_param.aml $OTAPACK/

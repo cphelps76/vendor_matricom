@@ -1,0 +1,132 @@
+# Copyright (C) 2012 Amlogic Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := AirPlay
+LOCAL_MODULE_OWNER := matricom
+LOCAL_SRC_FILES := common/app/$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := PRESIGNED
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := DLNA
+LOCAL_MODULE_OWNER := matricom
+LOCAL_SRC_FILES := common/app/$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := PRESIGNED
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := Ds
+LOCAL_MODULE_OWNER := matricom
+LOCAL_SRC_FILES := common/app/$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := PRESIGNED
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := DsUI
+LOCAL_MODULE_OWNER := matricom
+LOCAL_SRC_FILES := common/app/$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := PRESIGNED
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := OTAUpgrade
+LOCAL_MODULE_OWNER := matricom
+LOCAL_SRC_FILES := common/app/$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := PRESIGNED
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := RC_Client
+LOCAL_MODULE_OWNER := matricom
+LOCAL_SRC_FILES := common/app/$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := PRESIGNED
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := RC_Server
+LOCAL_MODULE_OWNER := matricom
+LOCAL_SRC_FILES := common/app/$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := PRESIGNED
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := xiamimusic
+LOCAL_MODULE_OWNER := matricom
+LOCAL_SRC_FILES := common/app/$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := PRESIGNED
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := Youku_TV_MoibleYoukuCom
+LOCAL_MODULE_OWNER := matricom
+LOCAL_SRC_FILES := common/app/$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := PRESIGNED
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := bookplay_package
+LOCAL_MODULE_OWNER := matricom
+LOCAL_SRC_FILES := DVBPlayer/app/$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := PRESIGNED
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := DVBPlayer
+LOCAL_MODULE_OWNER := matricom
+LOCAL_SRC_FILES := DVBPlayer/app/$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := PRESIGNED
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := DVBService
+LOCAL_MODULE_OWNER := matricom
+LOCAL_SRC_FILES := DVBPlayer/app/$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := PRESIGNED
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := progmanager
+LOCAL_MODULE_OWNER := matricom
+LOCAL_SRC_FILES := DVBPlayer/app/$(LOCAL_MODULE).apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := PRESIGNED
+include $(BUILD_PREBUILT)

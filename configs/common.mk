@@ -1,8 +1,18 @@
 # Common overlay
 PRODUCT_PACKAGE_OVERLAYS += vendor/matricom/overlay/common
 
+# Common packages to g18ref
+# Will need to be tweaked with the addition of new devices
 PRODUCT_PACKAGES += \
-    
+    AirPlay \
+    DLNA \
+    Ds \
+    DsUI \
+    OTAUpgrade \
+    RC_Client \
+    RC_Server \
+    xiamimusic \
+    Youku_TV_MoibleYoukuCom
 
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -48,6 +58,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.alarm_alert=Scandium.ogg
 
 PRODUCT_COPY_FILES += packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
+
+ifeq ($(TARGET_WANTS_DVBPLAYER),true)
+-include vendor/matricom/configs/dvbplayer.mk
+endif
+
 
 # Inherit common build.prop overrides
 -include vendor/matricom/configs/common_versions.mk

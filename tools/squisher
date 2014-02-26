@@ -1,9 +1,11 @@
 #!/bin/bash
 #
-# Squish a CM otapackage for distribution
+# Squish an otapackage for distribution
 #
 # cyanogen
 # AOKP
+# Matricom
+
 DATE=`date +%Y%m%d`
 OUT_TARGET_HOST=`uname -a | grep Darwin`
 if [ -z "$OUT_TARGET_HOST" ]
@@ -34,8 +36,6 @@ fi
 
 if [ "$TARGET_BUILD_TYPE" = "debug" ]; then
 OTAPACKAGE=$OUT/${TARGET_PRODUCT}_debug-ota-$DATE.zip
-elif [ "$TARGET_BUILD_VARIANT" = "userdebug" ]; then
-OTAPACKAGE=$OUT/$TARGET_PRODUCT-ota-eng.$DATE.zip
 else
 OTAPACKAGE=$OUT/$TARGET_PRODUCT-ota-$DATE.zip
 fi
@@ -44,7 +44,7 @@ echo -e "$OTAPACKAGE doesn't exist!";
 exit 1
 fi
 
-#OPTICHARGER=$ANDROID_BUILD_TOP/vendor/aokp/tools/opticharger
+OPTICHARGER=$ANDROID_BUILD_TOP/vendor/aokp/tools/opticharger
 QUIET=-q
 DELETE_BINS="applypatch applypatch_static check_prereq recovery updater"
 
@@ -109,9 +109,11 @@ mv -f $REPACK/parallel/framework-res.apk $REPACK/ota/system/framework/framework-
 mv -f $REPACK/parallel/*.apk $REPACK/ota/system/app/
 
 # Optimize /priv-app/
-cp $REPACK/ota/system/priv-app/*.apk .
-find ./ -name \*.apk | $XARGS $OPTICHARGER
-mv -f $REPACK/parallel/*.apk $REPACK/ota/system/priv-app/
+if [ -d $REPACK/ota/system/priv-app ]; then
+    cp $REPACK/ota/system/priv-app/*.apk .
+    find ./ -name \*.apk | $XARGS $OPTICHARGER
+    mv -f $REPACK/parallel/*.apk $REPACK/ota/system/priv-app/
+fi
 
 # Return to directory
 cd $REPACK/ota
@@ -169,12 +171,14 @@ rm -rf $REPACK/ota/recovery
 find $REPACK/ota/system/lib/modules -name "*.ko" -print0 | xargs -0 arm-eabi-strip --strip-unneeded
 
 # Determine what to name the new signed package
-
-MODVERSION=mx2update
+DEVICE=`sed -n -e'/ro.product.device/s/^.*=//p' $REPACK/ota/system/build.prop`
+FIRMWARE_REV=`sed -n -e'/ro.matricom.firmware.version/s/^.*=//p' $REPACK/ota/system/build.prop`
+MODVERSION=${DEVICE}_${FIRMWARE_REV}
 OUTFILE=$OUT/$MODVERSION.zip
 
-echo "boot.img"
-cp $OUT_DIR/target/product/g18ref/boot.img $REPACK/ota/
+
+echo "Until kernel is fixed copy stock boot.img"
+cp vendor/matricom/prebuilt/ota/boot.img $REPACK/ota/
 
 # Pack it up and sign
 echo -e $CL_CYN"Zipping package..."$CL_RST
@@ -197,15 +201,6 @@ img=`basename $OUTFILE`
 cd `dirname $OUTFILE`
 $MD5 $img >$img.md5sum
 ZIPSIZE=`ls -lah $OUTFILE | awk '{ print $5}' `
-echo -e
-echo -e $CL_RED" ______"$CL_MAG" _____"$CL_CYN" __ __"$CL_BLU" _____"$CL_RST
-echo -e $CL_RED" /\\\\ _ \\\\"$CL_MAG"/\\\\ __\`\\\\"$CL_CYN"/\\\\ \\\\/\\\\ \\\\"$CL_BLU" /\\\\ _ \`\\\\"$CL_RST
-echo -e $CL_RED" \\\\ \\\\ \\\\L\\\\ \\\\"$CL_MAG" \\\\ \\\\/\\\\ \\\\"$CL_CYN" \\\\ \\\\/'/'"$CL_BLU"\\\\ \\\\ \\\\L\\\\ \\\\"$CL_RST
-echo -e $CL_RED" \\\\ \\\\ __ \\\\"$CL_MAG" \\\\ \\\\ \\\\ \\\\"$CL_CYN" \\\\ , <"$CL_BLU" \\\\ \\\\ ,__/"$CL_RST
-echo -e $CL_RED" \\\\ \\\\ \\\\/\\\\ \\\\"$CL_MAG" \\\\ \\\\_\\\\ \\\\"$CL_CYN" \\\\ \\\\\\\\\`\\\\"$CL_BLU" \\\\ \\\\ \\\\/"$CL_RST
-echo -e $CL_RED" \\\\ \\\\_\\\\ \\\\_\\\\"$CL_MAG" \\\\_____\\\\"$CL_CYN" \\\\_\\\\ \\\\_\\\\"$CL_BLU"\\\\ \\\\_\\\\"$CL_RST
-echo -e $CL_RED" \\\\/_/\\\\/_/"$CL_MAG"\\\\/_____/"$CL_CYN"\\\\/_/\\\\/_/"$CL_BLU" \\\\/_/"$CL_RST
-echo -e
 echo -e $CL_CYN"===========-Package complete-==========="$CL_RST
 echo -e $CL_CYN"zip:"$CL_MAG" $OUTFILE"$CL_RST
 echo -e $CL_CYN"md5:"$CL_MAG" $(cat $img.md5sum | awk '{ print $1 }')"$CL_RST

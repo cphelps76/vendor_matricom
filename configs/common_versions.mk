@@ -6,6 +6,9 @@ DATE = $(shell vendor/matricom/tools/getdate)
 # Firmware Revision for device
 FIRMWARE_REV=$(DEVICE_FIRMWARE_REVISION)
 
+# Store firmware revision in build.prop
+PRODUCT_PROPERTY_OVERRIDES += ro.matricom.firmware.version=$(FIRMWARE_REV)
+
 ifneq ($(FULL_FIRMWARE_BUILD),)
     # Full System OTA Firmware update
     PRODUCT_PROPERTY_OVERRIDES += \       

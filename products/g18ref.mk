@@ -5,7 +5,7 @@ $(call inherit-product, device/amlogic/g18ref/full_g18ref.mk)
 DEVICE_FIRMWARE_REVISION=1.1.7S
 
 # Inherit common product files
-#$(call inherit-product, vendor/matricom/configs/common.mk)
+$(call inherit-product, vendor/matricom/configs/common.mk)
 
 PRODUCT_NAME := matricom_g18ref
 PRODUCT_BRAND := G-Box

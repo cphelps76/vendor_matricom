@@ -1,6 +1,6 @@
 PRODUCT_PACKAGES += \
     bookplay_package \
-    DVBPlayer \ 
+    DVBPlayer \
     DVBService \
     progmanager  
 

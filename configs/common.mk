@@ -60,12 +60,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
 
 ifeq ($(TARGET_WANTS_DVBPLAYER),true)
-include vendor/matricom/configs/dvbplayer.mk
+-include vendor/matricom/configs/dvbplayer.mk
 endif
 
 
 # Inherit common build.prop overrides
-include vendor/matricom/configs/common_versions.mk
+-include vendor/matricom/configs/common_versions.mk
 
 # common boot animation
 PRODUCT_COPY_FILES += \

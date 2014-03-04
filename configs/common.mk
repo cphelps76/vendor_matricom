@@ -45,11 +45,20 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
+# fs utils
 PRODUCT_PACKAGES += \
     mount.exfat \
     fsck.exfat \
     mkfs.exfat \
     ntfs-3g
+
+# Busybox
+ifneq ($(filter userdebug, $(TARGET_BUILD_VARIANT)),)
+PRODUCT_PACKAGES += \
+    busybox \
+    utility_busybox
+
+endif
 
 # Default ringtone
 PRODUCT_PROPERTY_OVERRIDES += \

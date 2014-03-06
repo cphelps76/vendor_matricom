@@ -1,18 +1,11 @@
 # Common overlay
 PRODUCT_PACKAGE_OVERLAYS += vendor/matricom/overlay/common
 
-# Common packages to g18ref
-# Will need to be tweaked with the addition of new devices
+# Common packages
 PRODUCT_PACKAGES += \
     AirPlay \
     DLNA \
-    Ds \
-    DsUI \
-    OTAUpgrade \
-    RC_Client \
-    RC_Server \
-    xiamimusic \
-    Youku_TV_MoibleYoukuCom
+    RC_Server
 
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
 PRODUCT_PROPERTY_OVERRIDES += \

@@ -5,7 +5,8 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/matricom/overlay/common
 PRODUCT_PACKAGES += \
     AirPlay \
     DLNA \
-    RC_Server
+    RC_Server \
+    Updater
 
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
 PRODUCT_PROPERTY_OVERRIDES += \

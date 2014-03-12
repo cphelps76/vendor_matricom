@@ -1,0 +1,183 @@
+#!/bin/bash
+#
+# Smart AOSP/Android source environment set up
+# (C) 2014 Brandon M - Matricom
+#
+# Must be run separately prior to pulling in sources
+# (this script will do so for the user)
+#
+# Checks for each package/dependency and downloads
+
+# functions
+function install_app() {
+local app_to_install=$1
+echo "Installing $app_to_install..."
+case $app_to_install in
+python)
+             sudo add-apt-repository ppa:fkrull/deadsnakes
+             sudo apt-get update
+             sudo apt-get install python2.7
+        ;;
+        make)
+             sudo apt-get install make
+        ;;
+        java)
+             sudo add-apt-repository ppa:webupd8team/java
+             sudo apt-get update
+             sudo apt-get install oracle-java6-installer
+        ;;
+        git)
+             sudo apt-get install git
+        ;;
+        repo)
+            mkdir ~/bin
+            export PATH=~/bin:$PATH
+            curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+            chmod a+x ~/bin/repo
+        ;;
+        curl)
+            sudo apt-get install curl
+        ;;
+    esac
+}
+
+function update_app() {
+    local app_to_update=$1
+    case $app_to_update in
+python)
+            echo "Python $PYTHON_VERSION found ... Need Python 2.6-2.7"
+            install_app python
+            sudo ln -sf /usr/local/bin/python2.7 /usr/bin/python
+        ;;
+        make)
+            install_app make
+        ;;
+        java)
+            install_app java
+            sudo update-java-alternatives -s java-6-oracle
+            sudo apt-get install oracle-java6-set-default
+        ;;
+        git)
+            install_app git
+        ;;
+    esac
+}
+
+# Global variables
+TIME_START=$(date +%s)
+
+################### PREPARE ######################################
+echo
+echo "Stage 1/3"
+echo "Prepare"
+echo
+# Check programs (if installed and versions)
+# Store the specific locations to variable for comparison shortly
+PYTHON_LOC=$(which python)
+MAKE_LOC=$(which make)
+JAVA_LOC=$(which java)
+GIT_LOC=$(which git)
+REPO_LOC=$(which repo)
+CURL_LOC=$(which curl)
+
+# Update utils needed to build Android or install if non existent
+#
+# Python
+echo "Checking python"
+if [ "$PYTHON_LOC" == "" ]; then
+    install_app python
+else
+    PYTHON_VERSION=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
+    if [ "$PYTHON_VERSION" < 2.6 ] || [ "$PYTHON_VERSION" >= 3 ]; then
+        update_app python
+    fi
+fi
+# Make
+echo "Checking make"
+if [ "$MAKE_LOC" == "" ]; then
+    install_app make
+else
+    MAKE_VERSION=$(make --version | head -n 1 | awk '{print $3}')
+    if [ "$MAKE_VERSION" < 3.81 ]; then
+        update_app make
+    fi
+fi
+# Java
+echo "Checking java"
+if [ "$JAVA_LOC" == "" ]; then
+    install_app java
+else
+    JAVA_VERSION=` echo "$(java -version 2>&1)" | head -n 1 | awk '{print $3}' | tr -d '"'`
+    if [ "$JAVA_VERSION" < 1.6 ] || [ "$JAVA_VERSION" > 1.69 ]; then
+        update_app java
+    fi
+fi
+# git
+echo "Checking git"
+if [ "$GIT_LOC" == "" ]; then
+    install_app git
+else
+    GIT_VERSION=$(git --version | awk '{print $3}')
+    if [ "$GIT_VERSION" < 1.7 ]; then
+        update_app git
+    fi
+fi
+# Curl
+echo "Checking curl"
+if [ "$CURL_LOC" == "" ]; then
+    install_app curl
+fi
+# Repo
+echo "Checking repo"
+if [ "$REPO_LOC" == "" ]; then
+    install_app repo
+fi
+
+# Install required packages
+echo "Installing required linux 64-bit packages"
+sudo apt-get install git gnupg flex bison gperf build-essential \
+  zip curl libc6-dev libncurses5-dev:i386 x11proto-core-dev \
+  libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-glx:i386 \
+  libgl1-mesa-dev g++-multilib mingw32 tofrodos \
+  python-markdown libxml2-utils xsltproc zlib1g-dev:i386 \
+  ia32-libs
+sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so
+
+# export USE_CCACHE to .bashrc
+echo export USE_CCACHE=1 >> ~/.bashrc
+# setup CCache
+prebuilts/misc/linux-x86/ccache/ccache -M 50G
+
+################## DOWNLOAD STAGE #####################
+echo "Stage 2/3"
+echo "Download"
+echo
+
+default=~/android
+read -p "Please enter desired working directory [$default]:" directory
+directory=${directory:-$default}
+mkdir $directory
+echo
+
+echo "init'ing Matricom repositories..."
+cd $directory
+repo init -u https://github.com/Matricom/platform_manifest.git -b master
+echo
+
+read -p "Please press any key to perform a repo sync or x to exit:" continue
+case $continue in
+x|X) exit
+    ;;
+*) synctime
+    ;;
+esac
+
+#################### SYNC STAGE #######################
+function synctime() {
+echo "Stage 3/3"
+    echo "Syncing...."
+    repo sync -j$(cat /proc/cpuinfo | grep "^processor" | wc -l)
+}
+TIME_FINISH=$(date +%s)
+DURATION=$($TIME_FINISH - $TIME_START)
+echo "Complete setup took $DURATION seconds"

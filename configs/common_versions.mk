@@ -3,24 +3,26 @@ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_VERSION_TAGS=release-keys USER=android-bui
 
 DATE = $(shell vendor/matricom/tools/getdate)
 
-# Firmware Revision for device
+# Stabel Firmware Revision for device
 FIRMWARE_REV=$(DEVICE_FIRMWARE_REVISION)
 
-# Store firmware revision in build.prop
-PRODUCT_PROPERTY_OVERRIDES += ro.matricom.firmware.version=$(FIRMWARE_REV)
-
+# Naming pneumonic controlled by FULL_FIRMWARE_BUILD and VENDOR_OVERLAY
 ifneq ($(FULL_FIRMWARE_BUILD),)
-    # Full System OTA Firmware update
-    PRODUCT_PROPERTY_OVERRIDES += \       
-        ro.matricom.version=$(TARGET_PRODUCT)_$(FIRMWARE_REV)
+    ifeq ($(VENDOR_OVERLAY),)
+        # Full System OTA Firmware update
+        VENDOR_FIRMWARE_VERSION=$(TARGET_PRODUCT)_$(FIRMWARE_REV)
+    else
+        # Full System OTA Firmware update for a vendor
+        # Let their overlay name supercede $(TARGET_PRODUCT)
+        VENDOR_FIRMWARE_VERSION=$(VENDOR_OVERLAY)_$(FIRMWARE_REV)
+    endif
 else
-ifneq ($(MATRICOM_DELTA),)
-        # OTA Nightly using OpenDelta
-        PRODUCT_PROPERTY_OVERRIDES += \
-            ro.matricom.version=$(TARGET_PRODUCT)_$(FIRMWARE_REV)_$(DATE)
-else
-        # Developer testing build
-        PRODUCT_PROPERTY_OVERRIDES += \
-            ro.matricom.version=$(TARGET_PRODUCT)_$(FIRMWARE_REV)_unofficial_$(DATE)
+    # Developer testing build
+    VENDOR_FIRMWARE_VERSION=$(TARGET_PRODUCT)_$(FIRMWARE_REV)_unofficial_$(DATE)
 endif
-endif
+
+# Store stable firmware revision in build.prop
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.matricom.firmware.version=$(FIRMWARE_REV) \
+    ro.matricom.version=$(VENDOR_FIRMWARE_VERSION)
+

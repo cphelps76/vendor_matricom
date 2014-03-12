@@ -1,5 +1,9 @@
 # Common overlay
+ifneq ($(VENDOR_OVERLAY),)
 PRODUCT_PACKAGE_OVERLAYS += vendor/matricom/overlay/common
+else
+PRODUCT_PACKAGE_OVERLAYS += vendor/matricom/overlay/$(VENDOR_OVERLAY)
+endif
 
 # Common packages
 PRODUCT_PACKAGES += \

@@ -1,2 +1,1 @@
 add_lunch_combo matricom_g18ref-user
-add_lunch_combo matricom_g18ref-userdebug

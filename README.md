@@ -59,9 +59,10 @@ Matricom
   
 **3: Building**
 
-  Once the source is synced, it's time to build:
+  Once the source is synced, it's time to build. But first we are going to setup ccache path:
   
     $ cd ~/android
+    $ prebuilts/misc/linux-x86/ccache/ccache -M 50G
     $ . build/envsetup.sh
     $ lunch
     Choose your lunch target here(g18ref is the mx2 so choose 5)

@@ -51,12 +51,9 @@ PRODUCT_PACKAGES += \
     ntfs-3g
 
 # Busybox
-ifneq ($(filter userdebug, $(TARGET_BUILD_VARIANT)),)
 PRODUCT_PACKAGES += \
     busybox \
     utility_busybox
-
-endif
 
 # Default ringtone
 PRODUCT_PROPERTY_OVERRIDES += \

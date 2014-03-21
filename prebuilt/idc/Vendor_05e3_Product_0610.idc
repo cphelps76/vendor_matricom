@@ -22,5 +22,5 @@
 
 # Basic Parameters
 touch.deviceType=touchScreen
-device.internal=1
+device.internal=0
 

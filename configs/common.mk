@@ -7,10 +7,25 @@ endif
 
 # Common packages
 PRODUCT_PACKAGES += \
-    AirPlay \
     DLNA \
     RC_Server \
+    RemoteIME \
     Updater
+
+ifeq ($(VENDOR_WANTS_ALL),true)
+PRODUCT_PACKAGES += \
+    AirPlay \
+    AppInstaller \
+    CommWebSite \
+    FileBrowser \
+    G-BoxLauncher \
+    MboxSetting
+endif
+
+# Input Device Configurations
+PRODUCT_COPY_FILES += \
+    vendor/matricom/prebuilt/idc/Vendor_05e3_Product_0610.idc:system/usr/idc/Vendor_05e3_Product_0610.idc \
+    vendor/matricom/prebuilt/idc/Vendor_2149_Product_2306.idc:system/usr/idc/Vendor_2149_Product_2306.idc
 
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
 PRODUCT_PROPERTY_OVERRIDES += \

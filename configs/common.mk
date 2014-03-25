@@ -12,7 +12,7 @@ PRODUCT_PACKAGES += \
     RemoteIME \
     Updater
 
-ifeq ($(VENDOR_WANTS_ALL),true)
+ifneq ($(VENDOR_WANTS_ALL),false)
 PRODUCT_PACKAGES += \
     AirPlay \
     AppInstaller \
@@ -60,9 +60,13 @@ PRODUCT_COPY_FILES += \
 
 # fs utils
 PRODUCT_PACKAGES += \
+    e2fsck \
+    mke2fs \
+    tune2fs \
     mount.exfat \
     fsck.exfat \
     mkfs.exfat \
+    ntfsfix \
     ntfs-3g
 
 # Busybox
@@ -82,10 +86,11 @@ ifeq ($(TARGET_WANTS_DVBPLAYER),true)
 -include vendor/matricom/configs/dvbplayer.mk
 endif
 
-
 # Inherit common build.prop overrides
 -include vendor/matricom/configs/common_versions.mk
 
+ifneq ($(TARGET_WANTS_STOCK_BOOTANIMATION),true)
 # common boot animation
 PRODUCT_COPY_FILES += \
     vendor/matricom/prebuilt/bootanimation/bootanimation.zip:system/media/bootanimation.zip
+endif

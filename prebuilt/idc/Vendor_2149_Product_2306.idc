@@ -23,4 +23,6 @@
 # Basic Parameters
 touch.deviceType=touchScreen
 device.internal=0
+touch.sizeAware=1
+touch.orientationAware=1
 

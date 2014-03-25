@@ -1,6 +1,6 @@
 # Inherit vendor first, if any
 ifneq ($(VENDOR_OVERLAY),)
-$(call inherit-product, vendor/matricom/configs/$(VENDOR_OVERLAY).mk)
+-include vendor/matricom/configs/$(VENDOR_OVERLAY).mk
 endif
 
 # Inherit AOSP device configuration for g18ref

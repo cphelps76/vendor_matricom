@@ -9,8 +9,12 @@ endif
 PRODUCT_PACKAGES += \
     DLNA \
     RC_Server \
-    RemoteIME \
-    Updater
+    RemoteIME
+
+# Updater
+ifneq ($(TARGET_INCLUDE_UPDATER),false)
+PRODUCT_PACKAGES += Updater
+endif
 
 ifneq ($(VENDOR_WANTS_ALL),false)
 PRODUCT_PACKAGES += \

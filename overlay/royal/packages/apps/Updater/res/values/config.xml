@@ -4,5 +4,6 @@
     <string name="conf_update_server_url_def" translatable="false">http://matriserver.com:3000/api</string>
     <string name="conf_changelog_url" translatable="false">http://localhost/changelog.xml</string>
 
-    <bool name="conf_enable_auto_updates">true</bool>
+    <bool name="config_enableAutoUpdates">true</bool>
+    <bool name="config_utilizeConfigFile">true</bool>
 </resources>

@@ -24,6 +24,8 @@ PRODUCT_PACKAGES += \
 # Custom Vendor Products
 PRODUCT_PACKAGES += CelebrityCrewTV
 
+DEVICE_PACKAGE_OVERLAYS += vendor/matricom/overlay/royal
+
 # ADB required to on by default
 PRODUCT_PROPERTY_OVERRIDES += persist.service.adb.enable=1
 

@@ -1,0 +1,5 @@
+<resources>
+    <string name="about_settings" product="mbx">About MediaBox</string>
+    <string name="privacy_settings" product="mbx">Reset MediaBox</string>
+    <string name="privacy_settings_title" product="mbx">Reset MediaBox</string>
+</resources>

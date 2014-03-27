@@ -26,6 +26,19 @@ PRODUCT_PACKAGES += \
     MboxSetting
 endif
 
+# Open source su
+ifeq ($(VENDOR_WANTS_OPEN_SU),true)
+PRODUCT_PACKAGES += su Superuser
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.root.access=3
+endif
+# No toast/dialog su binary
+ifeq ($(VENDOR_WANTS_SILENT_SU),true)
+PRODUCT_COPY_FILES += \
+    vendor/matricom/prebuilt/common/bin/su:system/xbin/su
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.root.access=3
+PRODUCT_PACKAGES += Superuser
+endif
+
 # Input Device Configurations
 PRODUCT_COPY_FILES += \
     vendor/matricom/prebuilt/idc/Vendor_05e3_Product_0610.idc:system/usr/idc/Vendor_05e3_Product_0610.idc \

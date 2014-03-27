@@ -1,0 +1,4 @@
+<resources>
+    <bool name="config_connectEthernetOnBoot">true</bool>
+</resources>
+

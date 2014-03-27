@@ -19,9 +19,7 @@ endif
 ifneq ($(VENDOR_WANTS_ALL),false)
 PRODUCT_PACKAGES += \
     AirPlay \
-    AppInstaller \
     CommWebSite \
-    FileBrowser \
     G-BoxLauncher \
     MboxSetting
 endif

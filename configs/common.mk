@@ -17,7 +17,9 @@ PRODUCT_PACKAGES += \
     AirPlay \
     CommWebSite \
     G-BoxLauncher \
-    MboxSetting
+    libGoogleAnalyticsV2 \
+    MboxSetting \
+    XBMC
 endif
 
 # Open source su
@@ -95,6 +97,14 @@ PRODUCT_COPY_FILES += packages/wallpapers/LivePicker/android.software.live_wallp
 
 ifeq ($(TARGET_WANTS_DVBPLAYER),true)
 -include vendor/matricom/configs/dvbplayer.mk
+endif
+
+ifneq ($(VENDOR_WANTS_ALL),false)
+ifeq ($(FULL_FIRMWARE_BUILD),true)
+ifeq ($(VENDOR_OVERLAY),)
+-include vendor/matricom/configs/gapps.mk
+endif
+endif
 endif
 
 # Inherit common build.prop overrides

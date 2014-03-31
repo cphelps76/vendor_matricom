@@ -33,3 +33,5 @@ PRODUCT_PROPERTY_OVERRIDES += persist.service.adb.enable=1
 VENDOR_WANTS_FLASH := false
 # Vendor needs SU
 VENDOR_WANTS_SILENT_SU := true
+# Vendor doesn't want gapps
+VENDOR_WANTS_GAPPS := false

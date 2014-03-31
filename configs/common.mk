@@ -99,12 +99,8 @@ ifeq ($(TARGET_WANTS_DVBPLAYER),true)
 -include vendor/matricom/configs/dvbplayer.mk
 endif
 
-ifneq ($(VENDOR_WANTS_ALL),false)
-ifeq ($(FULL_FIRMWARE_BUILD),true)
-ifeq ($(VENDOR_OVERLAY),)
+ifneq ($(VENDOR_WANTS_GAPPS),false)
 -include vendor/matricom/configs/gapps.mk
-endif
-endif
 endif
 
 # Inherit common build.prop overrides

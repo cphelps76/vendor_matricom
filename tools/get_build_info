@@ -34,7 +34,7 @@ OTAPACKAGE=${OUT_DIR}/vendor/target/${DEVICE}/${TARGET_PRODUCT}_${FIRMWARE_REVIS
 DEVICE=${TARGET_PRODUCT##*_}
 
 REPACK=$OUT/repack.d
-echo -e "Sanitizing environment..."
+echo -e "Sanitizing environment..."$
 rm -rf $REPACK
 mkdir -p $REPACK
 echo -e
@@ -48,8 +48,6 @@ unzip $QUIET $OTAPACKAGE
 echo -e
 )
 
-cp /android/xbmc-13/xbmcapp-armeabi-v7a-debug.apk ${REPACK}/ota/system/app/XBMC.apk
-
 BUILD_TIMESTAMP=`sed -n -e'/ro.build.date.utc/s/^.*=//p' $REPACK/ota/system/build.prop`
 
 echo -e "Zipping package..."
@@ -60,7 +58,7 @@ SECURITYDIR=$ANDROID_BUILD_TOP/build/target/product/security
 java -Xmx1024m \
 -jar $OUT_DIR/host/$OUT_TARGET_HOST/framework/signapk.jar \
 -w $SECURITYDIR/testkey.x509.pem $SECURITYDIR/testkey.pk8 \
-$REPACK/update.zip $OTAPACKAGE
+$REPACK/update.zip ${OTAPACKAGE}_rezipped
 echo -e
 echo -e "Cleaning up..."
 rm -rf $REPACK

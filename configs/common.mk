@@ -82,6 +82,10 @@ PRODUCT_PACKAGES += \
     ntfsfix \
     ntfs-3g
 
+# moar powah
+PRODUCT_PACKAGES += \
+    sqlite3
+
 # Busybox
 PRODUCT_PACKAGES += \
     busybox \

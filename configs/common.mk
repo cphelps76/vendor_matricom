@@ -23,16 +23,18 @@ PRODUCT_PACKAGES += \
 endif
 
 # Open source su
-ifeq ($(VENDOR_WANTS_OPEN_SU),true)
+ifeq ($(NIGHTLY_BUILD),true)
 PRODUCT_PACKAGES += su Superuser
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.root.access=3
 endif
 # No toast/dialog su binary
 ifeq ($(VENDOR_WANTS_SILENT_SU),true)
+ifneq ($(NIGHTLY_BUILD),true)
 PRODUCT_COPY_FILES += \
     vendor/matricom/prebuilt/common/bin/su:system/xbin/su
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.root.access=3
 PRODUCT_PACKAGES += Superuser
+endif
 endif
 
 # Input Device Configurations
@@ -103,7 +105,7 @@ ifeq ($(TARGET_WANTS_DVBPLAYER),true)
 -include vendor/matricom/configs/dvbplayer.mk
 endif
 
-ifneq ($(VENDOR_WANTS_GAPPS),false)
+ifneq ($(NIGHTLY_BUILD),true)
 -include vendor/matricom/configs/gapps.mk
 endif
 

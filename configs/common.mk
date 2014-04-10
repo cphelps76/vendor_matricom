@@ -14,7 +14,6 @@ endif
 
 ifneq ($(VENDOR_WANTS_ALL),false)
 PRODUCT_PACKAGES += \
-    AirPlay \
     CommWebSite \
     G-BoxLauncher \
     libGoogleAnalyticsV2 \

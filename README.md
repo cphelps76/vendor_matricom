@@ -65,7 +65,7 @@ Matricom
     $ prebuilts/misc/linux-x86/ccache/ccache -M 50G
     $ . build/envsetup.sh
     $ lunch
-    Choose your lunch target here(g18ref is the mx2 so choose 5)
+    Choose your lunch target here(g18 is the mx2 so choose 5)
     $ time mka bacon
     
   And the build will compile

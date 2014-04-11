@@ -23,7 +23,7 @@ repo forall -c '
             echo ""
         done
         echo ""
-    elif [ -n "$log" ] && [ -z "$private" ]; then
+    elif [ -n "$log" ] && [ -n "$private" ]; then
         echo "## **$project**"
         echo "---"
         echo "$log" | while read line

@@ -23,5 +23,17 @@ repo forall -c '
             echo ""
         done
         echo ""
+    elif [ -n "$log" ] && [ -z "$private" ]; then
+        echo "## **$project**"
+        echo "---"
+        echo "$log" | while read line
+        do
+            id=`echo "$line" | cut -f1 -d " "`
+            title=`echo "$line" | cut -f2 -d "-"`
+            echo "$id -$title"
+            #echo "$line"
+            echo ""
+        done
+        echo ""
     fi
 '  > "$changelog"_"$date".md

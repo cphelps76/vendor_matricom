@@ -1,12 +1,15 @@
 #!/bin/bash
 
+# source to use ANDROID_BUILD_TOP
+. build/envsetup.sh > /dev/null
+
 date=`date +"%m_%d_%Y"`
-changelog=
+changelog=Changelog
 repo forall -c '
     sdate=
     project=`repo info . | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g" | grep Project`
     project_short=`echo "$project" | cut -f2 -d " "`
-    private=`grep "$project_short" /Users/khasmek/Android/matricom/.repo/manifest.xml | grep private` 
+    private=`grep "$project_short" $ANDROID_BUILD_TOP/.repo/manifest.xml | grep private`
     log=`git log --pretty="%h - %s (%cn)" --no-merges --since=$sdate --date-order`
     if [ -n "$log" ] && [ -z "$private" ]; then
         echo "## **$project**"

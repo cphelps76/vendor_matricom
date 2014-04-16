@@ -26,15 +26,18 @@ else
 OUT_DIR=$ANDROID_BUILD_TOP/out
 fi
 
+# manipulate TARGET_PRODUCT to give us just device
+DEVICE=${TARGET_PRODUCT##*_}
+
 # This needs to be unhardcoded
-FIRMWARE_REVISION=1.1.7
-OTAPACKAGE=${OUT_DIR}/vendor/target/${DEVICE}/${TARGET_PRODUCT}_${FIRMWARE_REVISION}.zip
+FIRMWARE_REVISION=1.1.8
+OTAPACKAGE=${OUT_DIR}/target/product/${DEVICE}/${TARGET_PRODUCT}_${FIRMWARE_REVISION}.zip
 
 # manipulate TARGET_PRODUCT to give us just device
 DEVICE=${TARGET_PRODUCT##*_}
 
 REPACK=$OUT/repack.d
-echo -e "Sanitizing environment..."$
+echo -e "Sanitizing environment..."
 rm -rf $REPACK
 mkdir -p $REPACK
 echo -e
@@ -65,9 +68,8 @@ rm -rf $REPACK
 echo -e
 
 (
-img=`basename $OTAPACKAGE`
 ZIPSIZE=`ls -lah $OTAPACKAGE | awk '{ print $5}' `
-MD5SUM=`cat $img.md5sum | awk '{ print $1 }'`
+MD5SUM=`cat $OTAPACKAGE.md5sum | awk '{ print $1 }'`
 echo -e "===========-Package complete-==========="
 echo -e "zip: $OTAPACKAGE"
 echo -e "md5: $MD5SUM"

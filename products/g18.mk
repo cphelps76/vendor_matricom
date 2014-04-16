@@ -15,7 +15,11 @@ $(call inherit-product, vendor/matricom/configs/common.mk)
 PRODUCT_NAME := matricom_g18
 PRODUCT_BRAND := G-Box
 PRODUCT_DEVICE := g18
+ifneq ($(PRODUCT_MODEL_OVERRIDE),)
+PRODUCT_MODEL := $(PRODUCT_MODEL_OVERRIDE)
+else
 PRODUCT_MODEL := Matricom G-Box Midnight MX2
+endif
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME='G-Box MX2' \

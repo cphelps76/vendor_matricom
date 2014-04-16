@@ -22,7 +22,7 @@ PRODUCT_PACKAGES += \
 endif
 
 # Open source su
-ifeq ($(NIGHTLY_BUILD),true)
+ifeq ($(filter true,$(NIGHTLY_BUILD) $(VENDOR_WANTS_SU)),)
 PRODUCT_COPY_FILES += \
     vendor/matricom/prebuilt/common/bin/su:system/xbin/su \
     vendor/matricom/prebuilt/common/app/Superuser.apk:system/app/Superuser.apk
@@ -98,7 +98,7 @@ ifeq ($(TARGET_WANTS_DVBPLAYER),true)
 -include vendor/matricom/configs/dvbplayer.mk
 endif
 
-ifneq ($(NIGHTLY_BUILD),true)
+ifeq ($(filter true,$(NIGHTLY_BUILD) $(VENDOR_WANTS_GAPPS)),)
 -include vendor/matricom/configs/gapps.mk
 endif
 

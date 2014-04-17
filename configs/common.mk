@@ -16,8 +16,7 @@ PRODUCT_PACKAGES += \
     CommWebSite \
     G-BoxLauncher \
     libGoogleAnalyticsV2 \
-    MboxSetting \
-    XBMC
+    MboxSetting
 endif
 
 # Open source su
@@ -28,6 +27,10 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.root.access=3
 endif
+
+# XBMC
+PRODUCT_COPY_FILES += \
+    vendor/matricom/prebuilt/common/system/customized_data.tar:system/customized_data.tar
 
 # Input Device Configurations
 PRODUCT_COPY_FILES += \

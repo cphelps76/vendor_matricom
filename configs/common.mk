@@ -21,7 +21,7 @@ PRODUCT_PACKAGES += \
 endif
 
 # Open source su
-ifeq ($(or $(NIGHTLY_BUILD),$(VENDOR_WANTS_SU)),true)
+ifneq ($(or $(FULL_FIRMWARE),true),$(VENDOR_WANTS_SU),false)
 PRODUCT_COPY_FILES += \
     vendor/matricom/prebuilt/common/bin/su:system/xbin/su \
     vendor/matricom/prebuilt/common/app/Superuser.apk:system/app/Superuser.apk
@@ -101,7 +101,7 @@ ifeq ($(TARGET_WANTS_DVBPLAYER),true)
 -include vendor/matricom/configs/dvbplayer.mk
 endif
 
-ifeq ($(or $(NIGHTLY_BUILD),),$(VENDOR_WANTS_GAPPS),true)
+ifeq (or ($(FULL_BUILD),),$(VENDOR_WANTS_GAPPS),true)
 $(call inherit-product-if-exists, vendor/google/add-google-apps.mk)
 endif
 

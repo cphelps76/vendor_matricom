@@ -101,7 +101,7 @@ ifeq ($(TARGET_WANTS_DVBPLAYER),true)
 endif
 
 ifeq ($(or $(NIGHTLY_BUILD),),$(VENDOR_WANTS_GAPPS),true)
--include vendor/matricom/configs/gapps.mk
+$(call inherit-product-if-exists, vendor/google/add-google-apps.mk)
 endif
 
 # Inherit common build.prop overrides

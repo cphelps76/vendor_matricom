@@ -31,10 +31,12 @@ DEVICE=${TARGET_PRODUCT##*_}
 
 # This needs to be unhardcoded
 FIRMWARE_REVISION=1.1.8
-OTAPACKAGE=${OUT_DIR}/target/product/${DEVICE}/${TARGET_PRODUCT}_${FIRMWARE_REVISION}.zip
-
-# manipulate TARGET_PRODUCT to give us just device
-DEVICE=${TARGET_PRODUCT##*_}
+if [ ! -z $VENDOR_OVERLAY ]; then
+   PRODUCT=${VENDOR_OVERLAY}_${DEVICE}
+else
+   PRODUCT=${TARGET_PRODUCT}
+fi
+OTAPACKAGE=${OUT_DIR}/target/product/${DEVICE}/${PRODUCT}_${FIRMWARE_REVISION}.zip
 
 REPACK=$OUT/repack.d
 echo -e "Sanitizing environment..."

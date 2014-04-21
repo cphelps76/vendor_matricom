@@ -3,7 +3,6 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/matricom/overlay/common
 
 # Common packages
 PRODUCT_PACKAGES += \
-    RC_Server \
     RemoteIME
 
 # Updater

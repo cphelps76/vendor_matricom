@@ -29,8 +29,7 @@ fi
 # manipulate TARGET_PRODUCT to give us just device
 DEVICE=${TARGET_PRODUCT##*_}
 
-# This needs to be unhardcoded
-FIRMWARE_REVISION=1.1.8
+FIRMWARE_REVISION=`cat ${OUT_DIR}/target/product/${DEVICE}/system/build.prop | grep ro.matricom.firmware.version | cut -f2 -d "="`
 if [ ! -z $VENDOR_OVERLAY ]; then
    PRODUCT=${VENDOR_OVERLAY}_${DEVICE}
 else

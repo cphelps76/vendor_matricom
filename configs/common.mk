@@ -31,7 +31,7 @@ endif
 # XBMC
 ifneq ($(VENDOR_WANTS_XBMC),false)
 ifeq (,$(wildcard vendor/matricom/prebuilt/common/customized_data.tar))
-$(error Please run data-tar prior to making bacon)
+	$(shell ./build/tools/create-data-tar.sh)
 else
 PRODUCT_COPY_FILES += \
     vendor/matricom/prebuilt/common/customized_data.tar:system/customized_data.tar

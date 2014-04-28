@@ -7,8 +7,7 @@ endif
 $(call inherit-product, device/amlogic/g18/full_g18.mk)
 
 # Stable Firmware revision for device
-DEVICE_FIRMWARE_REVISION=1.1.7
-
+DEVICE_FIRMWARE_REVISION=0.0.1
 # Inherit common product files
 $(call inherit-product, vendor/matricom/configs/common.mk)
 

@@ -35,3 +35,5 @@ VENDOR_WANTS_FLASH := false
 VENDOR_WANTS_SU := true
 # Vendor doesn't want gapps
 VENDOR_WANTS_GAPPS := false
+# Vendor doesn't want xbmc
+VENDOR_WANTS_XBMC := false

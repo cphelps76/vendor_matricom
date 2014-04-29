@@ -7,7 +7,7 @@ DATE = $(shell vendor/matricom/tools/getdate)
 MAJOR_RELEASE   := 1
 STABLE_RELEASE  := 1
 BETA_RELEASE    := 8
-TESTING_RELEASE := 1
+TESTING_RELEASE := 2
 
 ifneq ($(TESTING_RELEASE),0)
 FIRMWARE_REVISION=$(MAJOR_RELEASE).$(STABLE_RELEASE).$(BETA_RELEASE).$(TESTING_RELEASE)
@@ -19,17 +19,17 @@ endif
 ifneq ($(FULL_FIRMWARE_BUILD),)
     ifeq ($(VENDOR_OVERLAY),)
         # Full System OTA Firmware update
-        VENDOR_FIRMWARE_VERSION=$(TARGET_PRODUCT)_$(FIRMWARE_REV)
+        VENDOR_FIRMWARE_VERSION=$(TARGET_PRODUCT)_$(FIRMWARE_REVISION)
         PRODUCT_PROPERTY_OVERRIDES += ro.matricom.version=$(VENDOR_FIRMWARE_VERSION)
     else
         # Full System OTA Firmware update for a vendor
         # Let their overlay name supercede $(TARGET_PRODUCT)
-        VENDOR_FIRMWARE_VERSION=$(VENDOR_OVERLAY)_$(FIRMWARE_REV)
+        VENDOR_FIRMWARE_VERSION=$(VENDOR_OVERLAY)_$(FIRMWARE_REVISION)
         PRODUCT_PROPERTY_OVERRIDES += ro.matricom.version=$(VENDOR_FIRMWARE_VERSION)
     endif
 else
     # Developer testing build
-    VENDOR_FIRMWARE_VERSION=$(TARGET_PRODUCT)_$(FIRMWARE_REV)_unofficial_$(DATE)
+    VENDOR_FIRMWARE_VERSION=$(TARGET_PRODUCT)_$(FIRMWARE_REVISION)_unofficial_$(DATE)
     PRODUCT_PROPERTY_OVERRIDES += ro.matricom.version=$(VENDOR_FIRMWARE_VERSION)
 endif
 

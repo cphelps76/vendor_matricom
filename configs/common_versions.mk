@@ -3,8 +3,17 @@ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_VERSION_TAGS=release-keys USER=android-bui
 
 DATE = $(shell vendor/matricom/tools/getdate)
 
-# Stabel Firmware Revision for device
-FIRMWARE_REV=$(DEVICE_FIRMWARE_REVISION)
+# Firmware versioning
+MAJOR_RELEASE   := 0
+STABLE_RELEASE  := 0
+BETA_RELEASE    := 0
+TESTING_RELEASE := 1
+
+ifneq ($(TESTING_RELEASE),0)
+FIRMWARE_REVISION=$(MAJOR_RELEASE).$(STABLE_RELEASE).$(BETA_RELEASE).$(TESTING_RELEASE)
+else
+FIRMWARE_REVISION=$(MAJOR_RELEASE).$(STABLE_RELEASE).$(BETA_RELEASE)
+endif
 
 # Naming pneumonic controlled by FULL_FIRMWARE_BUILD and VENDOR_OVERLAY
 ifneq ($(FULL_FIRMWARE_BUILD),)
@@ -25,4 +34,4 @@ else
 endif
 
 # Store stable firmware revision in build.prop
-PRODUCT_PROPERTY_OVERRIDES += ro.matricom.firmware.version=$(FIRMWARE_REV)
+PRODUCT_PROPERTY_OVERRIDES += ro.matricom.firmware.version=$(FIRMWARE_REVISION)

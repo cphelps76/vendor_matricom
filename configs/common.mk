@@ -13,9 +13,9 @@ endif
 ifneq ($(VENDOR_WANTS_ALL),false)
 PRODUCT_PACKAGES += \
     CommWebSite \
+    Launcher3 \
     G-BoxLauncher \
-    libGoogleAnalyticsV2 \
-    MboxSetting
+    libGoogleAnalyticsV2
 endif
 
 # Open source su
@@ -28,14 +28,8 @@ PRODUCT_PROPERTY_OVERRIDES += persist.sys.root.access=3
 endif
 
 # XBMC
-ifneq ($(VENDOR_WANTS_XBMC),false)
-ifeq (,$(wildcard vendor/matricom/prebuilt/common/customized_data.tar))
-$(error Please run data-tar prior to making bacon)
-else
 PRODUCT_COPY_FILES += \
     vendor/matricom/prebuilt/common/customized_data.tar:system/customized_data.tar
-endif
-endif
 
 # Input Device Configurations
 PRODUCT_COPY_FILES += \

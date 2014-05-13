@@ -55,14 +55,6 @@ LOCAL_CERTIFICATE := PRESIGNED
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := libGoogleAnalyticsV2
-LOCAL_SRC_FILES := common/lib/$(LOCAL_MODULE).jar
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_SUFFIX := .jar
-LOCAL_MODULE_CLASS := JAVA_LIBRARIES
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
 LOCAL_MODULE := CelebrityCrewTV
 LOCAL_MODULE_OWNER := matricom
 LOCAL_SRC_FILES := vendor/royal/app/$(LOCAL_MODULE).apk

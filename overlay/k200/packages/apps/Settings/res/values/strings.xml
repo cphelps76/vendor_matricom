@@ -1,0 +1,73 @@
+<resources>
+    <string name="phone_info_label" product="mbx">G-Box Q info</string>
+    <string name="roaming_warning_multiuser" product="mbx">When you allow data roaming, you may incur significant roaming charges!\n\nThis setting affects all users on this G-Box Q.</string>
+    <string name="crypt_keeper_encrypt_title" product="mbx">Encrypt G-Box Q</string>
+    <string name="crypt_keeper_encrypt_summary" product="mbx">Require a numeric PIN or password to decrypt your G-Box Q each time you power it on</string>
+    <string name="crypt_keeper_desc" product="mbx">You can encrypt your accounts, settings, downloaded apps and their data,
+            media, and other files. Once you encrypt your G-Box Q, you need to type a numeric PIN
+            or password to decrypt it each time you power it on. You can\'t decrypt your G-Box Q
+            except by performing a factory data reset, erasing all your data.\n\nEncryption takes
+            an hour or more. You must keep your G-Box Q plugged in until encryption is complete.
+            If you interrupt the encryption process, you will lose some or all of your data.
+    </string>
+    <string name="crypt_keeper_button_text" product="mbx">Encrypt G-Box Q</string>
+    <string name="crypt_keeper_final_desc" product="mbx">
+            The encryption operation is irreversible and if you interrupt it, you\'ll lose data. Encryption takes an hour or more, during which the G-Box Q will restart several times.
+    </string>
+    <string name="crypt_keeper_setup_description" product="mbx">Wait while your G-Box Q
+            is being encrypted. <xliff:g id="percent" example="50">^1</xliff:g>% complete.
+    </string>
+    <string name="crypt_keeper_failed_summary" product="mbx">
+            Encryption was interrupted and can\'t complete. As a result, the data on your G-Box Q is no longer accessible.
+            \n\n
+            To resume using your G-Box Q, you need to perform a factory reset.
+            When you set up your G-Box Q after the reset, you\'ll have an opportunity
+            to restore any data that was backed up to your Google Account.
+    </string>
+    <string name="nfc_quick_toggle_summary" product="mbx">Allow data exchange when the G-Box Q touches another device</string>
+    <string name="wifi_required_info_text" product="mbx">To complete setup, your G-Box Q needs access to Wi-Fi. After setup, you can switch between mobile data and Wi-Fi.</string>
+    <string name="wifi_skipped_message" product="mbx" msgid="6518433975501257341">WARNING: You may incur extra carrier data charges.\n\nG-Box Q setup can require significant network activity.</string>
+    <string name="wifi_and_mobile_skipped_message" product="mbx" msgid="5647058314212144925">WARNING: The G-Box Q won\'t be able to verify that your software is up to date.</string>
+    <string name="wifi_connect_failed_message" product="mbx" msgid="2006689630582761529">The G-Box Q was unable to connect to this Wi-Fi network.</string>
+    <string name="dock_audio_summary_none" product="mbx">G-Box Q not docked</string>
+    <string name="dock_not_found_text" product="mbx">You need to dock the G-Box Q before setting up dock audio.</string>
+    <string name="dock_sounds_enable_summary_on" product="mbx">Play sound when inserting or removing G-Box Q from dock</string>
+    <string name="accelerometer_summary_on" product="mbx">Switch orientation automatically when rotating G-Box Q</string>
+    <string name="accelerometer_summary_off" product="mbx">Switch orientation automatically when rotating G-Box Q</string>
+    <string name="device_info_settings" product="mbx">G-Box Q status</string>
+    <string name="master_clear_summary" product="mbx">Erases all data on G-Box Q</string>
+    <string name="master_clear_desc" product="mbx">"This will erase all data from your G-Box Q\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
+    <string name="master_clear_button_text" product="mbx">Reset G-Box Q</string>
+    <string name="location_street_level" product="mbx">Let apps use GPS on your G-Box Q to pinpoint your location</string>
+    <string name="about_settings" product="mbx">About G-Box Q</string>
+    <string name="install_all_warning" product="mbx">Your G-Box MX2 and personal data are more vulnerable to attack by apps
+            from unknown sources. You agree that you are solely responsible for any
+            damage to your G-Box Q or loss of data that may result from using
+            these apps.
+    </string>
+    <string name="security_settings_desc" product="mbx">This app can access the following on your G-Box Q:</string>
+    <string name="security_settings_desc_multi" product="mbx">This app can access the following on your G-Box Q.
+            In order to improve performance and reduce memory usage, some of these permissions
+            are available to <xliff:g id="base_app_name">%1$s</xliff:g>
+            because it runs in the same process as <xliff:g id="additional_apps_list">%2$s</xliff:g>:
+    </string>
+    <string name="move_app_to_internal" product="mbx">Move to G-Box Q</string>
+    <string name="runningservicedetails_stop_dlg_text" product="mbx">If you stop this service, some
+            features of your G-Box Q may stop working correctly until you power it off
+            and then on again.
+    </string>
+    <string name="testing_phone_info" product="mbx">G-Box Q information</string>
+    <string name="accessibility_service_security_warning_summary" product="mbx">
+            <xliff:g id="accessibility_service_name">%1$s</xliff:g> can
+              collect all of the text you type, except passwords. This includes personal data such as credit card
+              numbers. It can also collect data about your interactions with the G-Box Q.
+    </string>
+    <string name="power_idle" product="mbx">G-Box Q idle</string>
+    <string name="usage_type_phone" product="mbx">G-Box Q</string>
+    <string name="privacy_settings_title">Reset G-Box Q</string>
+    <string name="really_remove_account_message" product="mbx">Removing this account will delete all of its messages, contacts, and other data from the G-Box Q!</string>
+    <string name="remove_account_failed" product="mbx">This account is required by some apps. You can only remove it by resetting the G-Box Q to factory defaults (which deletes all your personal data) in Settings &gt; Backup &amp; reset.</string>
+    <string name="data_usage_auto_sync_on_dialog" product="mbx">Any changes you make to your accounts on the web will be automatically copied to your G-Box Q.\n\nSome accounts may also automatically copy any changes you make on the G-Box Q to the web. A Google Account works this way.\n\nTo choose which kinds of information to sync within each account, go to Settings &gt; Accounts.</string>
+    <string name="user_confirm_remove_message" product="mbx">This user\'s space and data will disappear from this G-Box Q. You can\'t undo this action.</string>
+    <string name="global_change_warning" product="mbx">This setting affects all users on this G-Box Q.</string>
+</resources>

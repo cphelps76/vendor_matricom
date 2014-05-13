@@ -12,6 +12,8 @@ DEVICE_FIRMWARE_REVISION=0.0.1
 # Inherit common product files
 $(call inherit-product, vendor/matricom/configs/common.mk)
 
+PRODUCT_PACKAGES_OVERLAYS += vendor/matricom/overlay/k200
+
 PRODUCT_NAME := matricom_k200
 PRODUCT_BRAND := G-Box
 PRODUCT_DEVICE := k200

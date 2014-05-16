@@ -1,0 +1,4 @@
+<resources>
+    <bool name="ga_enabledTracking">false</bool>
+</resources>
+

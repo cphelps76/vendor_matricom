@@ -4,7 +4,9 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/matricom/overlay/common
 # Common packages
 PRODUCT_PACKAGES += \
     DLNA \
-    RemoteIME
+    RemoteIME \
+    PicturePlayer \
+    VideoPlayer
 
 # Updater
 ifneq ($(TARGET_INCLUDE_UPDATER),false)

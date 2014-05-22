@@ -1,37 +1,28 @@
 # Version information used on all builds
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_VERSION_TAGS=release-keys USER=android-build BUILD_UTC_DATE=$(shell date +"%s")
 
-DATE = $(shell vendor/matricom/tools/getdate)
-
 # Firmware versioning
-MAJOR_RELEASE   := 1
-STABLE_RELEASE  := 1
-BETA_RELEASE    := 9
-TESTING_RELEASE := 5
+PRODUCT_VERSION_MAJOR := 1
+PRODUCT_VERSION_MINOR := 1
+PRODUCT_VERSION_BETA  := 9
+PRODUCT_VERSION_DEBUG := 5
 
-ifneq ($(TESTING_RELEASE),0)
-FIRMWARE_REVISION=$(MAJOR_RELEASE).$(STABLE_RELEASE).$(BETA_RELEASE).$(TESTING_RELEASE)
-else
-FIRMWARE_REVISION=$(MAJOR_RELEASE).$(STABLE_RELEASE).$(BETA_RELEASE)
-endif
-
-# Naming pneumonic controlled by FULL_FIRMWARE_BUILD and VENDOR_OVERLAY
-ifneq ($(FULL_FIRMWARE_BUILD),)
-    ifeq ($(VENDOR_OVERLAY),)
-        # Full System OTA Firmware update
-        VENDOR_FIRMWARE_VERSION=$(TARGET_PRODUCT)_$(FIRMWARE_REVISION)
-        PRODUCT_PROPERTY_OVERRIDES += ro.matricom.version=$(VENDOR_FIRMWARE_VERSION)
+ifeq ($(TARGET_BUILD_VARIANT),user)
+    # User is VENDOR, BETA, or FULL
+    ifeq ($(findstring matricom,$(TARGET_PRODUCT)),)
+        # Vendor build - appended with date for differentiation
+        FIRMWARE_REVISION=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)
     else
-        # Full System OTA Firmware update for a vendor
-        # Let their overlay name supercede $(TARGET_PRODUCT)
-        VENDOR_FIRMWARE_VERSION=$(VENDOR_OVERLAY)_$(FIRMWARE_REVISION)
-        PRODUCT_PROPERTY_OVERRIDES += ro.matricom.version=$(VENDOR_FIRMWARE_VERSION)
+        ifeq ($(PRODUCT_VERSION_BETA),0)
+            FIRMWARE_REVISION=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)
+        else
+            FIRMWARE_REVISION=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_BETA)
+        endif
     endif
 else
-    # Developer testing build
-    VENDOR_FIRMWARE_VERSION=$(TARGET_PRODUCT)_$(FIRMWARE_REVISION)_unofficial_$(DATE)
-    PRODUCT_PROPERTY_OVERRIDES += ro.matricom.version=$(VENDOR_FIRMWARE_VERSION)
+    # Debug build
+    FIRMWARE_REVISION=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_BETA).$(PRODUCT_VERSION_DEBUG)
 endif
 
-# Store stable firmware revision in build.prop
+# Store firmware revision in build.prop
 PRODUCT_PROPERTY_OVERRIDES += ro.matricom.firmware.version=$(FIRMWARE_REVISION)

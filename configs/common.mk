@@ -4,6 +4,7 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/matricom/overlay/common
 # Common packages
 PRODUCT_PACKAGES += \
     DLNA \
+    FileManager-2.0.2 \
     RemoteIME \
     PicturePlayer \
     VideoPlayer

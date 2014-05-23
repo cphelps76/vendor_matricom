@@ -2,6 +2,7 @@
     <!-- Verify apps is wanted to be disabled -->
     <bool name="config_disableAppVerification">true</bool>
 
-    <!-- Unknown sources is requested to be enabled -->
-    <bool name="config_allowUnknownSources">true</bool>
+    <!-- Device uses a hardware keyboard by default -->
+    <bool name="config_hardwareKeyboardEnabledByDefault">true</bool>
+
 </resources>

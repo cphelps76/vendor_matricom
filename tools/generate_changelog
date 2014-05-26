@@ -5,6 +5,15 @@
 
 date=`date +"%m_%d_%Y"`
 changelog=Changelog
+
+cat > "$changelog"_"$date".html << EOL
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name=""$changelog"_"$date"" content="Automated changelog for Matricom firmware." />
+<meta charset="UTF-8" />
+EOL
+
 repo forall -c '
     sdate=
     project=`repo info . | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g" | grep Project`
@@ -12,28 +21,27 @@ repo forall -c '
     private=`grep "$project_short" $ANDROID_BUILD_TOP/.repo/manifest.xml | grep private`
     log=`git log --pretty="%h - %s (%cn)" --no-merges --since=$sdate --date-order`
     if [ -n "$log" ] && [ -z "$private" ]; then
-        echo "## **$project**"
-        echo "---"
+        echo "<h2><strong>$project</strong></h2>"
+        echo "<hr />"
         echo "$log" | while read line
         do
             id=`echo "$line" | cut -f1 -d " "`
             title=`echo "$line" | cut -f2 -d "-"`
-            echo "[$id](http://github.com/Matricom/$project_short/commit/$id) -$title"
-            #echo "$line"
-            echo ""
+            echo "<p><a href="http://github.com/Matricom/$project_short/commit/$id">$id</a> - $title</p>"
         done
-        echo ""
     elif [ -n "$log" ] && [ -n "$private" ]; then
-        echo "## **$project**"
-        echo "---"
+        echo "<h2><strong>$project</strong></h2>"
+        echo "<hr />"
         echo "$log" | while read line
         do
             id=`echo "$line" | cut -f1 -d " "`
             title=`echo "$line" | cut -f2 -d "-"`
-            echo "$id -$title"
-            #echo "$line"
-            echo ""
+            echo "<p>$id - $title</p>"
         done
-        echo ""
     fi
-'  > "$changelog"_"$date".md
+'  >> "$changelog"_"$date".html
+
+cat >> "$changelog"_"$date".html << EOL
+</body>
+</html>
+EOL

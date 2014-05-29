@@ -1,0 +1,48 @@
+#!/bin/bash
+
+. $ANDROID_BUILD_TOP/vendor/matricom/tools/colors
+
+OUT_TARGET_HOST=`uname -a | grep Darwin`
+if [ -z "$OUT_TARGET_HOST" ]
+then
+   MD5=md5sum
+   SED=sed
+else
+   MD5="md5 -r "
+   SED=gsed
+fi
+
+# manipulate TARGET_PRODUCT to give us just device
+DEVICE=${TARGET_PRODUCT##*_}
+BUILD_PROP=${OUT}/system/build.prop
+FIRMWARE_REVISION=`cat ${BUILD_PROP} | grep ro.matricom.firmware.version | cut -f2 -d "="`
+
+if [ ! -z ${VENDOR_OVERLAY} ]; then
+    PRODUCT=${VENDOR_OVERLAY}_${DEVICE}
+else
+    PRODUCT=${TARGET_PRODUCT}
+fi
+
+OUTFILE=${OUT}/${PRODUCT}_${FIRMWARE_REVISION}.zip
+ZIPSIZE=`ls -lah ${OUTFILE} | awk '{ print $5}' `
+
+$MD5 ${OUTFILE} >${OUTFILE}.md5sum
+# cat all the install info > $OUT/factory_update_params.aml
+cat >${OUT}/factory_update_param.aml <<EOL
+--show_text
+--update_package=/external_sd/${PRODUCT}_${FIRMWARE_REVISION}.zip
+--run_command=/system/bin/reboot
+EOL
+
+echo -e ""
+echo -e ${CL_INS}"  Package Complete:"${CL_RST}
+echo -e ${CL_MAG}"      ${OUTFILE}"${CL_RST}
+echo -e ${CL_INS}"  Package Size:"${CL_RST}
+echo -e ${CL_MAG}"       ${ZIPSIZE}"
+echo -e ${CL_INS}"  AML Autoscript:"${CL_RST}
+echo -e ${CL_MAG}"      ${OUT}/factory_update_param.aml"${CL_RST}
+echo -e ${CL_INS}"  MD5:"${CL_RST}
+echo -e ${CL_MAG}"      $(cat ${OUTFILE}.md5sum | cut -d " " -f1)"${CL_RST}
+echo -e ${CL_INS}"  Timestamp:"${CL_RST}
+echo -e ${CL_MAG}"      $(sed -n -e'/ro\.build\.date\.utc/s/^.*=//p' ${BUILD_PROP})"${CL_RST}
+echo -e ""

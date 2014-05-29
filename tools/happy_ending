@@ -13,24 +13,17 @@ else
 fi
 
 # manipulate TARGET_PRODUCT to give us just device
-DEVICE=${TARGET_PRODUCT##*_}
 BUILD_PROP=${OUT}/system/build.prop
 FIRMWARE_REVISION=`cat ${BUILD_PROP} | grep ro.matricom.firmware.version | cut -f2 -d "="`
 
-if [ ! -z ${VENDOR_OVERLAY} ]; then
-    PRODUCT=${VENDOR_OVERLAY}_${DEVICE}
-else
-    PRODUCT=${TARGET_PRODUCT}
-fi
-
-OUTFILE=${OUT}/${PRODUCT}_${FIRMWARE_REVISION}.zip
+OUTFILE=${OUT}/${TARGET_PRODUCT}_${FIRMWARE_REVISION}.zip
 ZIPSIZE=`ls -lah ${OUTFILE} | awk '{ print $5}' `
 
 $MD5 ${OUTFILE} >${OUTFILE}.md5sum
 # cat all the install info > $OUT/factory_update_params.aml
 cat >${OUT}/factory_update_param.aml <<EOL
 --show_text
---update_package=/external_sd/${PRODUCT}_${FIRMWARE_REVISION}.zip
+--update_package=/external_sd/${TARGET_PRODUCT}_${FIRMWARE_REVISION}.zip
 --run_command=/system/bin/reboot
 EOL
 

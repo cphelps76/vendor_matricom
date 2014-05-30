@@ -16,7 +16,6 @@ endif
 
 ifneq ($(VENDOR_WANTS_ALL),false)
 PRODUCT_PACKAGES += \
-    CommWebSite \
     G-BoxLauncher \
     libGoogleAnalyticsV2
 endif

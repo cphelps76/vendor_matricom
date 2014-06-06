@@ -52,7 +52,7 @@ Matricom
   
     $ mkdir ~/android
     $ cd android
-    $ repo init -u https://github.com/Matricom/platform_manifest.git -b master
+    $ repo init -u https://github.com/Matricom/platform_manifest.git -b kitkat
     $ repo sync (can be increased with the arg of -j# where the number is the number of threads your CPU can handle)
     
   This will take a large amount of time depending on the processor.
@@ -65,7 +65,7 @@ Matricom
     $ prebuilts/misc/linux-x86/ccache/ccache -M 50G
     $ . build/envsetup.sh
     $ lunch
-    Choose your lunch target here(g18 is the mx2 so choose 5)
+    Choose your lunch target here(g18 is the mx2)
     $ time mka bacon
     
   And the build will compile

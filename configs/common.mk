@@ -53,6 +53,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.setupwizard.enterprise_mode=1 \
     ro.kernel.android.checkjni=0
 
+# selinux
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.selinux=1
+
 PRODUCT_COPY_FILES += \
     vendor/matricom/prebuilt/common/etc/resolv.conf:system/etc/resolv.conf
 

@@ -1,3 +1,21 @@
+# Product makefile for nanonation (royal)
+# Defines prior to actual target inclusion
+
+# Client wants certain packages
+VENDOR_WANTS_ALL := false
+
+# Client doesn't want flash support
+VENDOR_WANTS_FLASH := false
+
+# Client needs su
+VENDOR_WANTS_SU := true
+
+# Client doesn't want gapps
+VENDOR_WANTS_GAPPS := false
+
+# Client doesn't want XBMC
+VENDOR_WANTS_XBMC := false
+
 # Inherit client configuration files
 $(call inherit-product, vendor/clients/nanonation_product.mk)
 

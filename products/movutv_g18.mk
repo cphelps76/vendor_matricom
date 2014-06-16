@@ -1,3 +1,25 @@
+# Product makefile for movutv
+# Defines prior to actual target inclusion
+
+# Client wants full firmware
+VENDOR_WANTS_ALL := true
+
+# Client wants gapps
+VENDOR_WANTS_GAPPS := true
+
+# Client wants SU
+VENDOR_WANTS_SU := true
+
+# Updater not included
+TARGET_INCLUDE_UPDATER := false
+
+# Initlogo disabled
+TARGET_WANTS_INITLOGO_DISABLED := true
+
+# Client wants stock bootanimation
+TARGET_WANTS_STOCK_BOOTANIMATION := true
+
+
 # Inherit client configuration files
 $(call inherit-product, vendor/clients/movutv_product.mk)
 

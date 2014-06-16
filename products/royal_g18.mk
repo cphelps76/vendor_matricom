@@ -1,8 +1,8 @@
-# Inherit AOSP device configuration for g18
-$(call inherit-product, device/amlogic/g18/full_g18.mk)
-
 # Inherit client configuration files
 $(call inherit-product, vendor/clients/nanonation_product.mk)
+
+# Inherit AOSP device configuration for g18
+$(call inherit-product, device/amlogic/g18/full_g18.mk)
 
 # Inherit some common product files
 $(call inherit-product, vendor/matricom/configs/common.mk)

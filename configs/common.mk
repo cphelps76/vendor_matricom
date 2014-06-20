@@ -29,15 +29,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.root.access=3
 endif
 
-# XBMC
-ifneq ($(VENDOR_WANTS_XBMC),false)
-ifeq (,$(wildcard vendor/matricom/prebuilt/common/customized_data.tar))
-$(warning "Please run data-tar prior to making bacon to include data package")
-else
-PRODUCT_COPY_FILES += \
-    vendor/matricom/prebuilt/common/customized_data.tar:system/customized_data.tar
-endif
-endif
+-include vendor/matricom-priv/xbmc/xbmc.mk
 
 # Input Device Configurations
 PRODUCT_COPY_FILES += \

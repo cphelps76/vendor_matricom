@@ -27,9 +27,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.root.access=3
 endif
 
-# XBMC
-PRODUCT_COPY_FILES += \
-    vendor/matricom/prebuilt/common/customized_data.tar:system/customized_data.tar
+-include vendor/matricom-priv/xbmc/xbmc.mk
 
 # Input Device Configurations
 PRODUCT_COPY_FILES += \

@@ -11,12 +11,8 @@
             If you interrupt the encryption process, you will lose some or all of your data.
     </string>
     <string name="crypt_keeper_button_text" product="mbx">Encrypt G-Box Q</string>
-    <string name="crypt_keeper_final_desc" product="mbx">
-            The encryption operation is irreversible and if you interrupt it, you\'ll lose data. Encryption takes an hour or more, during which the G-Box Q will restart several times.
-    </string>
-    <string name="crypt_keeper_setup_description" product="mbx">Wait while your G-Box Q
-            is being encrypted. <xliff:g id="percent" example="50">^1</xliff:g>% complete.
-    </string>
+    <string name="crypt_keeper_final_desc" product="mbx">The encryption operation is irreversible and if you interrupt it, you\'ll lose data. Encryption takes an hour or more, during which the G-Box Q will restart several times.</string>
+
     <string name="crypt_keeper_failed_summary" product="mbx">
             Encryption was interrupted and can\'t complete. As a result, the data on your G-Box Q is no longer accessible.
             \n\n
@@ -46,22 +42,12 @@
             these apps.
     </string>
     <string name="security_settings_desc" product="mbx">This app can access the following on your G-Box Q:</string>
-    <string name="security_settings_desc_multi" product="mbx">This app can access the following on your G-Box Q.
-            In order to improve performance and reduce memory usage, some of these permissions
-            are available to <xliff:g id="base_app_name">%1$s</xliff:g>
-            because it runs in the same process as <xliff:g id="additional_apps_list">%2$s</xliff:g>:
-    </string>
     <string name="move_app_to_internal" product="mbx">Move to G-Box Q</string>
     <string name="runningservicedetails_stop_dlg_text" product="mbx">If you stop this service, some
             features of your G-Box Q may stop working correctly until you power it off
             and then on again.
     </string>
     <string name="testing_phone_info" product="mbx">G-Box Q information</string>
-    <string name="accessibility_service_security_warning_summary" product="mbx">
-            <xliff:g id="accessibility_service_name">%1$s</xliff:g> can
-              collect all of the text you type, except passwords. This includes personal data such as credit card
-              numbers. It can also collect data about your interactions with the G-Box Q.
-    </string>
     <string name="power_idle" product="mbx">G-Box Q idle</string>
     <string name="usage_type_phone" product="mbx">G-Box Q</string>
     <string name="privacy_settings_title">Reset G-Box Q</string>

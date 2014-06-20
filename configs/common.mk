@@ -20,15 +20,10 @@ PRODUCT_PACKAGES += \
     libGoogleAnalyticsV2
 endif
 
-# Open source su
-ifneq ($(or $(PRODUCT_VERSION_BETA),0),$(VENDOR_WANTS_SU),false)
-PRODUCT_COPY_FILES += \
-    vendor/matricom/prebuilt/common/bin/su:system/xbin/su \
-    vendor/matricom/prebuilt/common/app/Superuser.apk:system/app/Superuser.apk
+# su inclusion determined in makefile
+-include vendor/matricom-priv/su/superuser.mk
 
-PRODUCT_PROPERTY_OVERRIDES += persist.sys.root.access=3
-endif
-
+# Xbmc inclusion determined in makefile
 -include vendor/matricom-priv/xbmc/xbmc.mk
 
 # Input Device Configurations

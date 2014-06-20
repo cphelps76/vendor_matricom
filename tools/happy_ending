@@ -23,7 +23,7 @@ $MD5 ${OUTFILE} >${OUTFILE}.md5sum
 # cat all the install info > $OUT/factory_update_params.aml
 cat >${OUT}/factory_update_param.aml <<EOL
 --show_text
---update_package=/external_sd/${TARGET_PRODUCT}_${FIRMWARE_REVISION}.zip
+--update_package=/storage/sdcard1/${TARGET_PRODUCT}_${FIRMWARE_REVISION}.zip
 --run_command=/system/bin/reboot
 EOL
 

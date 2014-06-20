@@ -97,10 +97,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_COPY_FILES += packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
 
-ifeq ($(TARGET_WANTS_DVBPLAYER),true)
--include vendor/matricom/configs/dvbplayer.mk
-endif
-
 ifeq (or ($(TARGET_PRODUCT_BETA),0),$(VENDOR_WANTS_GAPPS),true)
 $(call inherit-product-if-exists, vendor/google/add-google-apps.mk)
 endif

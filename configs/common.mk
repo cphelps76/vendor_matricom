@@ -96,11 +96,11 @@ ifeq (or ($(TARGET_PRODUCT_BETA),0),$(VENDOR_WANTS_GAPPS),true)
 $(call inherit-product-if-exists, vendor/google/add-google-apps.mk)
 endif
 
-# Inherit common build.prop overrides
--include vendor/matricom/configs/common_versions.mk
-
 ifneq ($(TARGET_WANTS_STOCK_BOOTANIMATION),true)
 # common boot animation
 PRODUCT_COPY_FILES += \
     vendor/matricom/prebuilt/bootanimation/bootanimation.zip:system/media/bootanimation.zip
 endif
+
+# Inherit common build.prop overrides
+-include vendor/matricom/configs/common_versions.mk

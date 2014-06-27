@@ -3,8 +3,7 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/matricom/overlay/common
 
 # Common packages
 PRODUCT_PACKAGES += \
-    RemoteIME \
-    FileManager-2.0.2
+    RemoteIME
 
 # Updater
 ifneq ($(TARGET_INCLUDE_UPDATER),false)

@@ -90,15 +90,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_COPY_FILES += packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
 
-ifeq (or ($(TARGET_PRODUCT_BETA),0),$(VENDOR_WANTS_GAPPS),true)
-$(call inherit-product-if-exists, vendor/google/add-google-apps.mk)
+ifneq ($(TARGET_WANTS_STOCK_BOOTANIMATION),true)
+# common boot animation
+PRODUCT_COPY_FILES += \
+    vendor/matricom/prebuilt/bootanimation/bootanimation.zip:system/media/bootanimation.zip
 endif
 
 # Inherit common build.prop overrides
 -include vendor/matricom/configs/common_versions.mk
 
-ifneq ($(TARGET_WANTS_STOCK_BOOTANIMATION),true)
-# common boot animation
-PRODUCT_COPY_FILES += \
-    vendor/matricom/prebuilt/bootanimation/bootanimation.zip:system/media/bootanimation.zip
+ifeq ($(BUILD_TYPE),stable)
+$(call inherit-product-if-exists, vendor/google/add-google-apps.mk)
 endif

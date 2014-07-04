@@ -11,18 +11,22 @@ ifeq ($(TARGET_BUILD_VARIANT),user)
     # User is VENDOR, BETA, or FULL
     ifeq ($(findstring matricom,$(TARGET_PRODUCT)),)
         # Vendor build - appended with date for differentiation
-        FIRMWARE_REVISION=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)
+        BUILD_TYPE=vendor
+        BUILD_NUMBER=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)
     else
         ifeq ($(PRODUCT_VERSION_BETA),0)
-            FIRMWARE_REVISION=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)
+            BUILD_TYPE=stable
+            BUILD_NUMBER=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)
         else
-            FIRMWARE_REVISION=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_BETA)
+            BUILD_TYPE=beta
+            BUILD_NUMBER=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_BETA)
         endif
     endif
 else
     # Debug build
-    FIRMWARE_REVISION=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_BETA).$(PRODUCT_VERSION_DEBUG)
+    BUILD_TYPE=debug
+    BUILD_NUMBER=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_BETA).$(PRODUCT_VERSION_DEBUG)
 endif
 
 # Store firmware revision in build.prop
-PRODUCT_PROPERTY_OVERRIDES += ro.matricom.firmware.version=$(FIRMWARE_REVISION)
+PRODUCT_PROPERTY_OVERRIDES += ro.matricom.firmware.version=$(BUILD_NUMBER)

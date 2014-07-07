@@ -17,16 +17,18 @@ PRODUCT_PACKAGES += \
     libGoogleAnalyticsV2
 endif
 
-# su inclusion determined in makefile
--include vendor/matricom-priv/su/superuser.mk
-
 # Xbmc inclusion determined in makefile
 -include vendor/matricom-priv/xbmc/xbmc.mk
 
 # Input Device Configurations
 PRODUCT_COPY_FILES += \
-    vendor/matricom/prebuilt/idc/Vendor_05e3_Product_0610.idc:system/usr/idc/Vendor_05e3_Product_0610.idc \
-    vendor/matricom/prebuilt/idc/Vendor_2149_Product_2306.idc:system/usr/idc/Vendor_2149_Product_2306.idc
+    vendor/matricom/prebuilt/common/usr/idc/Vendor_05e3_Product_0610.idc:system/usr/idc/Vendor_05e3_Product_0610.idc \
+    vendor/matricom/prebuilt/common/usr/idc/Vendor_2149_Product_2306.idc:system/usr/idc/Vendor_2149_Product_2306.idc
+
+# Controller support
+PRODUCT_COPY_FILES += \
+    vendor/matricom/prebuilt/common/usr/keylayout/Vendor_045e_Product_0291.kl:system/usr/keylayout/Vendor_045e_Product_0291.kl \
+    vendor/matricom/prebuilt/common/usr/keylayout/Vendor_045e_Product_0719.kl:system/usr/keylayout/Vendor_045e_Product_0719.kl
 
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -104,3 +106,5 @@ ifeq ($(BUILD_TYPE),stable)
 $(call inherit-product-if-exists, vendor/google/add-google-apps.mk)
 endif
 
+# su inclusion determined in makefile
+-include vendor/matricom-priv/su/superuser.mk

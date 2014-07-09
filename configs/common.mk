@@ -20,9 +20,6 @@ PRODUCT_PACKAGES += \
     libGoogleAnalyticsV2
 endif
 
-# su inclusion determined in makefile
--include vendor/matricom-priv/su/superuser.mk
-
 # Xbmc inclusion determined in makefile
 -include vendor/matricom-priv/xbmc/xbmc.mk
 
@@ -102,3 +99,6 @@ endif
 ifeq ($(BUILD_TYPE),stable)
 $(call inherit-product-if-exists, vendor/google/add-google-apps.mk)
 endif
+
+# su inclusion determined in makefile
+-include vendor/matricom-priv/su/superuser.mk

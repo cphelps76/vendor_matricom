@@ -14,6 +14,7 @@ ifneq ($(VENDOR_WANTS_ALL),false)
 PRODUCT_PACKAGES += \
     Launcher3 \
     G-BoxLauncher \
+    SetupWizard \
     libGoogleAnalyticsV2
 endif
 

@@ -14,17 +14,48 @@ fi
 
 # manipulate TARGET_PRODUCT to give us just device
 BUILD_PROP=${OUT}/system/build.prop
-FIRMWARE_REVISION=`cat ${BUILD_PROP} | grep ro.matricom.firmware.version | cut -f2 -d "="`
+DEVICE=$(cat ${BUILD_PROP} | grep ro.matricom.device | cut -d '=' -f2)
+MATRICOM_DEVICE=$(echo ${TARGET_PRODUCT} | cut -d '_' -f2)
 
+FIRMWARE_REVISION=$(cat ${BUILD_PROP} | grep ro.matricom.firmware.version | cut -f2 -d "=")
+
+# Full path to firmware zip package
 OUTFILE=${OUT}/${TARGET_PRODUCT}_${FIRMWARE_REVISION}.zip
 ZIPSIZE=`ls -lah ${OUTFILE} | awk '{ print $5}' `
 
+# md5sum of zip package
 $MD5 ${OUTFILE} >${OUTFILE}.md5sum
+MD5SUM=$(cat ${OUTFILE}.md5sum | cut -d " " -f1)
+
+# Timestamp of build completion extracted from build.prop
+TIMESTAMP=$(sed -n -e'/ro\.build\.date\.utc/s/^.*=//p' ${BUILD_PROP})
+
+# Determine the release from the $FIRMWARE_REVISION
+IFS=.
+read -a array <<< "$FIRMWARE_REVISION"
+case ${#array[@]} in
+    1) CHANNEL=STABLE ;;
+    2) CHANNEL=STABLE ;;
+    3) CHANNEL=NIGHTLY ;;
+    4) CHANNEL=EXPERIMENTAL ;;
+esac
+
 # cat all the install info > $OUT/factory_update_params.aml
 cat >${OUT}/factory_update_param.aml <<EOL
 --show_text
 --update_package=/storage/sdcard1/${TARGET_PRODUCT}_${FIRMWARE_REVISION}.zip
 --run_command=/system/bin/reboot
+EOL
+
+# cat update info (if needed) to > $OUT/update_info
+cat >${OUT}/update_info <<EOL
+FILENAME=${TARGET_PRODUCT}_${FIRMWARE_REVISION}.zip
+MD5=${MD5SUM}
+TIMESTAMP=${TIMESTAMP}
+CHANNEL=${CHANNEL}
+API_LEVEL=19
+DEVICE=${DEVICE}
+SUBDIRECTORY=${MATRICOM_DEVICE}
 EOL
 
 echo -e ""
@@ -35,7 +66,7 @@ echo -e ${CL_MAG}"       ${ZIPSIZE}"
 echo -e ${CL_INS}"  AML Autoscript:"${CL_RST}
 echo -e ${CL_MAG}"      ${OUT}/factory_update_param.aml"${CL_RST}
 echo -e ${CL_INS}"  MD5:"${CL_RST}
-echo -e ${CL_MAG}"      $(cat ${OUTFILE}.md5sum | cut -d " " -f1)"${CL_RST}
+echo -e ${CL_MAG}"      ${MD5SUM}"${CL_RST}
 echo -e ${CL_INS}"  Timestamp:"${CL_RST}
-echo -e ${CL_MAG}"      $(sed -n -e'/ro\.build\.date\.utc/s/^.*=//p' ${BUILD_PROP})"${CL_RST}
+echo -e ${CL_MAG}"      ${TIMESTAMP}"${CL_RST}
 echo -e ""

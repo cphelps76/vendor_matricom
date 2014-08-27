@@ -109,3 +109,6 @@ endif
 
 # su inclusion determined in makefile
 -include vendor/matricom-priv/su/superuser.mk
+
+# Include key determinate 
+-include vendor/matricom-priv/security/keys.mk

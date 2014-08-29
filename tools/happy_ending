@@ -69,4 +69,6 @@ echo -e ${CL_INS}"  MD5:"${CL_RST}
 echo -e ${CL_MAG}"      ${MD5SUM}"${CL_RST}
 echo -e ${CL_INS}"  Timestamp:"${CL_RST}
 echo -e ${CL_MAG}"      ${TIMESTAMP}"${CL_RST}
+echo -e ${CL_INS}"  Update info:"${CL_RST}
+echo -e ${CL_MAG}"      ${OUT}/update_info"${CL_RST}
 echo -e ""

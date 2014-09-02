@@ -7,7 +7,7 @@ $(call inherit-product, vendor/matricom/configs/common.mk)
 PRODUCT_NAME := matricom_g18
 PRODUCT_BRAND := G-Box
 PRODUCT_DEVICE := g18
-PRODUCT_MODEL := Matricom G-Box Midnight MX2
+PRODUCT_MODEL := G-Box Midnight MX2
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME='G-Box MX2' \

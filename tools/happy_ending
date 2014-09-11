@@ -39,3 +39,23 @@ echo -e ${CL_MAG}"      $(cat ${OUTFILE}.md5sum | cut -d " " -f1)"${CL_RST}
 echo -e ${CL_INS}"  Timestamp:"${CL_RST}
 echo -e ${CL_MAG}"      $(sed -n -e'/ro\.build\.date\.utc/s/^.*=//p' ${BUILD_PROP})"${CL_RST}
 echo -e ""
+
+# NOTE: to use this feature, you also need to get the nma.sh
+# shell script from http://storage.locked.io/files/nma.sh
+# everything else is pretty self explanatory. The api_key
+# file *is* in the .gitignore of this repo, so it will not
+# be tracked.
+if [[ $USE_NMA = true ]]; then
+    api_key=`cat $ANDROID_BUILD_TOP/vendor/matricom/tools/api_key`
+    priority="0"
+    app_name="Matricom Build Notifier"
+    event=`date`
+    description="${TARGET_PRODUCT} Build complete!"
+
+    notify-my-android \
+                    -k "$api_key" \
+                    -p "$priority" \
+                    -a "$app_name" \
+                    -e "$event" \
+                    -d "$description"
+fi

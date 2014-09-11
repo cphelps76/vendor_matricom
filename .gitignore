@@ -1,2 +1,5 @@
 #customized_data.tar 
 prebuilt/common/customized_data.tar
+
+# nma api_key (if being used)
+tools/api_key

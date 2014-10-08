@@ -101,5 +101,8 @@ ifeq ($(BUILD_TYPE),stable)
 $(call inherit-product-if-exists, vendor/google/add-google-apps.mk)
 endif
 
+# Quickboot
+-include vendor/matricom-priv/quickboot/quickboot.mk
+
 # su inclusion determined in makefile
 -include vendor/matricom-priv/su/superuser.mk

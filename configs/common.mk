@@ -106,3 +106,6 @@ endif
 
 # su inclusion determined in makefile
 -include vendor/matricom-priv/su/superuser.mk
+
+# For Google TV remote functionality
+-include vendor/matricom-priv/anymote/anymote.mk

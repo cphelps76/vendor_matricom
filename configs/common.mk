@@ -19,7 +19,7 @@ PRODUCT_PACKAGES += \
 endif
 
 # Xbmc inclusion determined in makefile
--include vendor/matricom-priv/xbmc/xbmc.mk
+-include vendor/matricom-priv/kodi/kodi.mk
 
 # Input Device Configurations
 PRODUCT_COPY_FILES += \

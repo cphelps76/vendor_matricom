@@ -15,7 +15,7 @@ cat > "$changelog"_"$date".html << EOL
 EOL
 
 repo forall -c '
-    sdate=
+    sdate=10/01/2014
     project=`repo info . | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g" | grep Project`
     project_short=`echo "$project" | cut -f2 -d " "`
     private=`grep "$project_short" $ANDROID_BUILD_TOP/.repo/manifest.xml | grep private`

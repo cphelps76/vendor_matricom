@@ -26,6 +26,7 @@ else
     # Debug build
     BUILD_TYPE=debug
     BUILD_NUMBER=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_BETA).$(PRODUCT_VERSION_DEBUG)
+    PLATFORM_VERSION_CODENAME=UNOFFICIAL
 endif
 
 # Store firmware revision in build.prop

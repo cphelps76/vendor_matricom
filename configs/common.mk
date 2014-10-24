@@ -109,14 +109,7 @@ endif
 
 # Root
 ifeq ($(PLATFORM_VERSION_CODENAME),UNOFFICIAL)
-SUPERUSER_EMBEDDED=true
-SUPERUSER_PACKAGE_PREFIX=com.android.settings.matricom.superuser
-ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
-PRODUCT_PROPERTY_OVERRIDES += persist.sys.root_access=3
-    
-PRODUCT_PACKAGES += \
-    Superuser \
-    su
+-include vendor/matricom-priv/su/superuser.mk
 endif
 
 # Include key determinate

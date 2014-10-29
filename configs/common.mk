@@ -103,7 +103,7 @@ endif
 # Inherit common build.prop overrides
 -include vendor/matricom/configs/common_versions.mk
 
-ifneq ($(PLATFORM_VERSION_CODENAME),UNOFFICIAL)
+ifeq ($(PLATFORM_VERSION_CODENAME),UNOFFICIAL)
 $(call inherit-product-if-exists, vendor/google/add-google-apps.mk)
 endif
 
